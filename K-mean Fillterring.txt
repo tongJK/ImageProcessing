@@ -1,0 +1,27 @@
+# >> Question II : k-mean<<
+#  5735512155 Sig&Img_1/59
+
+
+# import ค่า iris dataset จากไฟล์ cvs
+ i = read.csv("C:/Users/Tong/Desktop/Signal Assignment/Iris.csv")
+ View(i)
+
+
+# ลบข้อมูลที่ไม่ต้องการออกจากคาราง
+ i2 = i
+ i2$Species <- NULL
+ View(i2)
+
+
+# ใช้ฟังก์ชัน kmeans เพื่อหาค่า k-mean cluster และ ค่า k-mean
+ results <- kmeans(i2,3)
+ results
+
+
+# สร้างตารางเพื่อ plot ค่า Species ที่หาได้จากค่า k-mean
+ table(i$Species,results$cluster)
+
+
+# แสดงค่าของ Petal และ Sepal ที่หาได้
+ plot(i[c("Petal.Lenght","Petal.Width")], col = results$cluster)
+ plot(i[c("Petal.Lenght","Petal.Width")], col = i$Species)
