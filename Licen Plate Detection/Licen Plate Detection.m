@@ -1,18 +1,18 @@
 % >> Question I : license plate<<
 %5735512155 Sig&Img_1/59
 
-%  ��ǹ�����ҹ����Ҿ
+%  ÊèÇ¹¡ÒÃÍèÒ¹¤èÒÀÒ¾
 rgbImage = imread('C:\Users\Tong\Desktop\Coe #13\signal&Image Processing\Signal Assignment 59\v8301977-0.jpg');
 
 
-% �֧��� dimansion �ͧ�Ҿ����
+% ´Ö§¤èÒ dimansion ¢Í§ÀÒ¾ÁÒãªé
 [rows, columns, numberOfColorBands] = size(rgbImage);
 
 subplot(2,3,1);
 imshow(rgbImage),title('Original Image');
 
 
-% ź�ͺ���·���¹.
+% Åº¢Íº»éÒÂ·ÐàºÕÂ¹.
 rgbImage(1:25, :, :) = 255;
 rgbImage(:, 1:20, :) = 255;
 rgbImage(:, 670:end, :) = 255;
@@ -23,7 +23,7 @@ imshow(rgbImage),title('Remove Edge');
 
 
 
-% ����¹�ٻ�� binary
+% à»ÅÕèÂ¹ÃÙ»à»ç¹ binary
 thresholdValue = 55;
 binaryImage = rgbImage(:,:, 1) < thresholdValue | rgbImage(:,:, 2) < thresholdValue | rgbImage(:,:, 3) < thresholdValue;
 
@@ -31,7 +31,7 @@ subplot(2,3,3);
 imshow(binaryImage),title('Binary Image');
 
 
-% ��� filter ���͡�ͧ��ǹ�Թ
+% ãÊè filter à¾×èÍ¡ÃÍ§ÊèÇ¹à¡Ô¹
 filledImage = imfill(binaryImage, 'holes');
 
 subplot(2,3,4);
@@ -39,7 +39,7 @@ imshow(filledImage),title('Filled Binary Image');
 drawnow;
 
 
-% ��ѧ��ѹ����鹢ͺ
+% ãªé¿Ñ§¡ìªÑ¹ËÒàÊé¹¢Íº
 [labeledImage numberOfBlobs] = bwlabel(filledImage);
 measurements = regionprops(labeledImage, 'BoundingBox');
 for k = 1 : numberOfBlobs
@@ -61,7 +61,7 @@ for k = 1 : numberOfBlobs
 end
 
 figure
-% �ʴ����Ѿ��
+% áÊ´§¼ÅÅÑ¾¸ì
 for k = 1 : numberOfBlobs
 	x1 = measurements(k).BoundingBox(1);
 	y1 = measurements(k).BoundingBox(2);
