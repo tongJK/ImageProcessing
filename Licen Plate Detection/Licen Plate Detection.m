@@ -1,18 +1,18 @@
 % >> Question I : license plate<<
 %5735512155 Sig&Img_1/59
 
-%  ÊèÇ¹¡ÒÃÍèÒ¹¤èÒÀÒ¾
+%  ส่วนการอ่านค่าภาพ
 rgbImage = imread('C:\Users\Tong\Desktop\Coe #13\signal&Image Processing\Signal Assignment 59\v8301977-0.jpg');
 
 
-% ´Ö§¤èÒ dimansion ¢Í§ÀÒ¾ÁÒãªé
+% ดึงค่า dimansion ของภาพมาใช้
 [rows, columns, numberOfColorBands] = size(rgbImage);
 
 subplot(2,3,1);
 imshow(rgbImage),title('Original Image');
 
 
-% Åº¢Íº»éÒÂ·ÐàºÕÂ¹.
+% ลบขอบป้ายทะเบียน.
 rgbImage(1:25, :, :) = 255;
 rgbImage(:, 1:20, :) = 255;
 rgbImage(:, 670:end, :) = 255;
@@ -22,8 +22,7 @@ subplot(2,3,2);
 imshow(rgbImage),title('Remove Edge');
 
 
-
-% à»ÅÕèÂ¹ÃÙ»à»ç¹ binary
+% เปลี่ยนรูปเป็น binary
 thresholdValue = 55;
 binaryImage = rgbImage(:,:, 1) < thresholdValue | rgbImage(:,:, 2) < thresholdValue | rgbImage(:,:, 3) < thresholdValue;
 
@@ -39,7 +38,7 @@ imshow(filledImage),title('Filled Binary Image');
 drawnow;
 
 
-% ãªé¿Ñ§¡ìªÑ¹ËÒàÊé¹¢Íº
+% ใส่ filter เพื่อกรองส่วนเกิน
 [labeledImage numberOfBlobs] = bwlabel(filledImage);
 measurements = regionprops(labeledImage, 'BoundingBox');
 for k = 1 : numberOfBlobs
@@ -61,7 +60,7 @@ for k = 1 : numberOfBlobs
 end
 
 figure
-% áÊ´§¼ÅÅÑ¾¸ì
+% แสดงผลลัพธ์
 for k = 1 : numberOfBlobs
 	x1 = measurements(k).BoundingBox(1);
 	y1 = measurements(k).BoundingBox(2);
